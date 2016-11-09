@@ -1,0 +1,28 @@
+{
+  "name": "tinyurl",
+  "version": "0.0.1",
+  "description": "This is a Tiny URL system implemented by Robert Fu",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "sufu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sufu/tinyurl.git"
+  },
+  "keywords": [
+    "tinyurl"
+  ],
+  "bugs": {
+    "url": "https://github.com/sufu/tinyurl/issues"
+  },
+  "homepage": "https://github.com/sufu/tinyurl#readme"
+}
