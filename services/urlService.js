@@ -5,13 +5,35 @@
 var shortToLong = {};
 var longToShort = {};
 
-var getShortUrl = function () {
+var getShortUrl = function (longUrl) {
     console.log("getShortUrl");
 
+    if (longUrl.indexOf("http") == -1) {
+        longUrl = "http://" + longUrl;
+    }
+
+    if (longToShort[longUrl] == null) {
+        var shortUrl = generateShortUrl();
+        shortToLong[shortUrl] = longUrl;
+        longToShort[longUrl] = shortUrl;
+        return shortUrl;
+    } else {
+        return longToShort[longUrl];
+    }
 }
 
-var getLongUrl = function () {
+var generateShortUrl = function () {
+    return Object.keys(longToShort).length;
+}
+
+var getLongUrl = function (shortUrl) {
     console.log("getLongUrl");
+    console.log(shortUrl);
+    if (shortToLong[shortUrl] == null) {
+        console.log("cannot find long Url");
+    } else {
+        return shortToLong[shortUrl];
+    }
 }
 
 module.exports = {

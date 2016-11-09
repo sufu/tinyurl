@@ -11,7 +11,7 @@ var urlService = require("../services/urlService");
 router.post("/urls", jsonParser, function (req, res) {
     console.log(req.body.longUrl);
     var longUrl = req.body.longUrl;
-    var shortUrl = urlService.getShortUrl();
+    var shortUrl = urlService.getShortUrl(longUrl);
     res.json({
         shortUrl: shortUrl,
         longUrl: longUrl

@@ -9,8 +9,10 @@ var urlService = require("../services/urlService");
 
 router.get("*", function (req, res) {
     var shortUrl = req.originalUrl.slice(1);
-    var longUrl = urlService.getLongUrl();
-    res.redirect("longUrl");
+    console.log("redirect");
+    console.log(shortUrl);
+    var longUrl = urlService.getLongUrl(shortUrl);
+    res.redirect(longUrl);
 });
 
 
