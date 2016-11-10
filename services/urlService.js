@@ -1,6 +1,7 @@
 /**
  * Created by sufu on 11/7/16.
  */
+var base62 = require("base62");
 
 var shortToLong = {};
 var longToShort = {};
@@ -23,7 +24,7 @@ var getShortUrl = function (longUrl) {
 }
 
 var generateShortUrl = function () {
-    return Object.keys(longToShort).length;
+    return base62.encode(Object.keys(longToShort).length);
 }
 
 var getLongUrl = function (shortUrl) {
