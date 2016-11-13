@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <title>How you doing</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min.js"></script>
+    <script src="/public/js/app.js"></script>
+    <script src="/public/js/controllers/homeController.js"></script>
+    <script src="/public/js/controllers/urlController.js"></script>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
-<body>
+<body ng-app="tinyurlApp">
     <header>
         <div class="container">
-            <a href="/">TinyUrl</a>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/">TinyUrl</a>
+                </div>
+            </nav>
         </div>
     </header>
+
+    <div class="container">
+        <div ng-view></div>
+    </div>
 </body>
 </html>

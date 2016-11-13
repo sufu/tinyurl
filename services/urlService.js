@@ -3,38 +3,47 @@
  */
 var base62 = require("base62");
 
-var shortToLong = {};
-var longToShort = {};
+var UrlModel = require("../models/urlModel");
 
-var getShortUrl = function (longUrl) {
+var getShortUrl = function (longUrl, callback) {
     console.log("getShortUrl");
 
     if (longUrl.indexOf("http") == -1) {
         longUrl = "http://" + longUrl;
     }
 
-    if (longToShort[longUrl] == null) {
-        var shortUrl = generateShortUrl();
-        shortToLong[shortUrl] = longUrl;
-        longToShort[longUrl] = shortUrl;
-        return shortUrl;
-    } else {
-        return longToShort[longUrl];
-    }
+    UrlModel.findOne({longUrl: longUrl}, function (err, data) {
+        if (data) {
+            callback(data);
+        } else {
+            generateShortUrl(function (shortUrl) {
+                var url = new UrlModel({
+                    shortUrl: shortUrl,
+                    longUrl: longUrl
+                });
+                url.save();
+                callback(url);
+            });
+        }
+    });
 }
 
-var generateShortUrl = function () {
-    return base62.encode(Object.keys(longToShort).length);
+
+
+var generateShortUrl = function (callback) {
+    UrlModel.count({}, function (err, data) {
+        callback(base62.encode(data));
+    });
 }
 
-var getLongUrl = function (shortUrl) {
+var getLongUrl = function (shortUrl, callback) {
     console.log("getLongUrl");
     console.log(shortUrl);
-    if (shortToLong[shortUrl] == null) {
-        console.log("cannot find long Url");
-    } else {
-        return shortToLong[shortUrl];
-    }
+
+    UrlModel.findOne({shortUrl: shortUrl}, function (err, data) {
+        callback(data);
+    });
+
 }
 
 module.exports = {

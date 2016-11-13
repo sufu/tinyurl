@@ -9,12 +9,24 @@ var jsonParser = bodyParser.json();
 var urlService = require("../services/urlService");
 
 router.post("/urls", jsonParser, function (req, res) {
-    console.log(req.body.longUrl);
+    console.log("rest post ", req.body.longUrl);
     var longUrl = req.body.longUrl;
-    var shortUrl = urlService.getShortUrl(longUrl);
-    res.json({
-        shortUrl: shortUrl,
-        longUrl: longUrl
+    urlService.getShortUrl(longUrl, function (url) {
+        console.log("rest post ", url);
+        res.json(url);
+    });
+});
+
+
+router.get("/urls/:shortUrl", function (req, res) {
+    var shortUrl = req.params.shortUrl;
+    console.log("router get shortUrl:", shortUrl);
+    urlService.getLongUrl(shortUrl, function (url) {
+        if (url) {
+            res.json(url);
+        } else {
+            res.status(404).send("Not Exist!");
+        }
     });
 });
 
