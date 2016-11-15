@@ -12,7 +12,7 @@ router.get("*", function (req, res) {
     console.log(shortUrl);
     urlService.getLongUrl(shortUrl, function (url) {
         if (url) {
-            res.redirect(Url.longUrl);
+            res.redirect(url.longUrl);
         } else {
             res.sendFile("404.html", {root: __dirname + "../public/views/"})
         }
