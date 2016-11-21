@@ -2,7 +2,7 @@
  * Created by sufu on 11/11/16.
  */
 
-var app = angular.module("tinyurlApp", ["ngRoute", "ngResource"]);
+var app = angular.module("tinyurlApp", ["ngRoute", "ngResource", "chart.js"]);
 
 app.config(function ($routeProvider) {
     $routeProvider

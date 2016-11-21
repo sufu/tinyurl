@@ -7,12 +7,17 @@ var app = express();
 var restRouter = require("./routers/rest");
 var redirectRouter = require("./routers/redirect");
 var indexRouter = require("./routers/index");
+var useragent = require("express-useragent");
 
 var mongoose = require("mongoose");
 
 mongoose.connect("mongodb://user:user@ds019766.mlab.com:19766/tinyurl");
 
 app.use("/public", express.static(__dirname + "/public"));
+
+app.use("/node_modules", express.static(__dirname + "/node_modules"));
+
+app.use(useragent.express());
 
 app.use("/api/v1", restRouter);
 
