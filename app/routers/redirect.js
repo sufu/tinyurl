@@ -9,8 +9,8 @@ var statsService = require("../services/statsService");
 
 router.get("*", function (req, res) {
     var shortUrl = req.originalUrl.slice(1);
-    console.log("redirect");
-    console.log(shortUrl);
+    //console.log("redirect");
+    //console.log(shortUrl);
     urlService.getLongUrl(shortUrl, function (url) {
         if (url) {
             res.redirect(url.longUrl);

@@ -10,10 +10,10 @@ var urlService = require("../services/urlService");
 var statsService = require("../services/statsService");
 
 router.post("/urls", jsonParser, function (req, res) {
-    console.log("rest post ", req.body.longUrl);
+    //console.log("rest post ", req.body.longUrl);
     var longUrl = req.body.longUrl;
     urlService.getShortUrl(longUrl, function (url) {
-        console.log("rest post ", url);
+        //console.log("rest post ", url);
         res.json(url);
     });
 });
@@ -21,7 +21,7 @@ router.post("/urls", jsonParser, function (req, res) {
 
 router.get("/urls/:shortUrl", function (req, res) {
     var shortUrl = req.params.shortUrl;
-    console.log("router get shortUrl:", shortUrl);
+    //console.log("router get shortUrl:", shortUrl);
     urlService.getLongUrl(shortUrl, function (url) {
         if (url) {
             res.json(url);
@@ -34,10 +34,10 @@ router.get("/urls/:shortUrl", function (req, res) {
 router.get("/urls/:shortUrl/:info", function (req, res) {
     statsService.getUrlInfo(req.params.shortUrl, req.params.info, function (data) {
         if (data) {
-            console.log("get info ", data);
+            //console.log("get info ", data);
             res.json(data);
         } else {
-            console.log(req.params.info, "get info error data: ", data);
+            //console.log(req.params.info, "get info error data: ", data);
             res.json({no: "input"});
         }
     });

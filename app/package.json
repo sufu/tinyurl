@@ -17,7 +17,8 @@
     "express-useragent": "^1.0.4",
     "geoip-lite": "^1.1.8",
     "mongoose": "^4.6.7",
-    "redis": "^2.6.3"
+    "redis": "^2.6.3",
+    "socket.io": "^1.7.1"
   },
   "devDependencies": {},
   "repository": {

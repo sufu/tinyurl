@@ -5,16 +5,24 @@
 angular.module("tinyurlApp")
     .controller("urlController", ["$scope", "$http", "$routeParams",
         function ($scope, $http, $routeParams) {
+
+        var socket = io.connect();
+
         $http.get("/api/v1/urls/" + $routeParams.shortUrl)
             .success(function (data) {
                 $scope.longUrl = data.longUrl;
                 $scope.shortUrl = data.shortUrl;
                 $scope.shortUrlToShow = "http://localhost/" + data.shortUrl;
+                socket.emit("registerShortUrl", $scope.shortUrl);
             });
-        $http.get("/api/v1/urls/" + $routeParams.shortUrl + "/totalClicks")
-            .success(function (data) {
-                $scope.totalClicks = data;
-            });
+            function getTotalClicks() {
+                $http.get("/api/v1/urls/" + $routeParams.shortUrl + "/totalClicks")
+                    .success(function (data) {
+                        $scope.totalClicks = data;
+                    });
+            }
+
+            getTotalClicks();
 
         $scope.getTime = function (time) {
             $scope["lineData"] = [];
@@ -64,4 +72,13 @@ angular.module("tinyurlApp")
         renderChart("pie", "country");
         renderChart("base", "platform");
         renderChart("bar", "browser");
+
+        socket.on('shortUrlUpdated', function () {
+            getTotalClicks();
+            $scope.getTime($scope.time);
+            renderChart("doughnut", "referer");
+            renderChart("pie", "country");
+            renderChart("base", "platform");
+            renderChart("bar", "browser");
+        });
     }]);

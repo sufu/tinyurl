@@ -6,13 +6,12 @@ var base62 = require("base62");
 var redis = require("redis");
 var host = process.env.REDIS_PORT_6379_TCP_ADDR;
 var port = process.env.REDIS_PORT_6379_TCP_PORT;
-
 var redisClient = redis.createClient(port, host);
 
 var UrlModel = require("../models/urlModel");
 
 var getShortUrl = function (longUrl, callback) {
-    console.log("getShortUrl");
+    //console.log("getShortUrl");
 
     if (longUrl.indexOf("http") == -1) {
         longUrl = "http://" + longUrl;
@@ -45,11 +44,7 @@ var getShortUrl = function (longUrl, callback) {
             });
         }
     });
-
-
 }
-
-
 
 var generateShortUrl = function (callback) {
     UrlModel.count({}, function (err, data) {
@@ -58,8 +53,8 @@ var generateShortUrl = function (callback) {
 }
 
 var getLongUrl = function (shortUrl, callback) {
-    console.log("getLongUrl");
-    console.log(shortUrl);
+    //console.log("getLongUrl");
+    //console.log(shortUrl);
 
     redisClient.get(shortUrl, function (err, longUrl) {
         if (longUrl) {

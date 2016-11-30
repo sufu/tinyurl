@@ -9,8 +9,8 @@ router.get("/", function (req, res) {
     var options = {root: __dirname + '/../public/views/'};
     res.sendFile("index.html", options, function (err) {
         if (err) {
-            console.log(err);
-            console.log("error sending index.html");
+            //console.log(err);
+            //console.log("error sending index.html");
         } else {
             console.log("Sent: index.html");
         }
